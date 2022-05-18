@@ -10,7 +10,21 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_05_18_032154) do
+ActiveRecord::Schema.define(version: 2022_05_18_034129) do
+
+  create_table "inventoryitems", force: :cascade do |t|
+    t.integer "instock_qty"
+    t.integer "incoming_qty"
+    t.integer "reserved_qty"
+    t.integer "min_instock_qty"
+    t.integer "max_instock_qty"
+    t.date "expiration_date"
+    t.string "size"
+    t.integer "product_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["product_id"], name: "index_inventoryitems_on_product_id"
+  end
 
   create_table "products", force: :cascade do |t|
     t.string "name"
@@ -22,4 +36,5 @@ ActiveRecord::Schema.define(version: 2022_05_18_032154) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
+  add_foreign_key "inventoryitems", "products"
 end
