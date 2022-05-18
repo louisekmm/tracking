@@ -1,45 +1,45 @@
 <%= form_with model: product do |form| %>
-  <div>
+  <p>
     <%= form.label :name %><br>
     <%= form.text_field :name %>
     <% product.errors.full_messages_for(:name).each do |message| %>
       <div><%= message %></div>
     <% end %>
-  </div>
+  </p>
 
-  <div>
-    <%= form.label :name %><br>
-    <%= form.text_field :name %>
-    <% product.errors.full_messages_for(:name).each do |message| %>
+  <p>
+    <%= form.label :description %><br>
+    <%= form.text_field :description %>
+    <% product.errors.full_messages_for(:description).each do |message| %>
       <div><%= message %></div>
     <% end %>
-  </div>
+  </p>
 
-  <div>
-    <%= form.label :name %><br>
-    <%= form.text_field :name %>
-    <% product.errors.full_messages_for(:name).each do |message| %>
+  <p>
+    <%= form.label :weight %><br>
+    <%= form.text_field :weight %>
+    <% product.errors.full_messages_for(:weight).each do |message| %>
       <div><%= message %></div>
     <% end %>
-  </div>
+  </p>
 
-  <div>
-    <%= form.label :name %><br>
-    <%= form.text_field :name %>
-    <% product.errors.full_messages_for(:name).each do |message| %>
+  <p>
+    <%= form.label :price %><br>
+    <%= form.text_field :price %>
+    <% product.errors.full_messages_for(:price).each do |message| %>
       <div><%= message %></div>
     <% end %>
-  </div>
+  </p>
 
-    <div>
-      <%= form.label :name %><br>
-      <%= form.text_field :name %>
-      <% product.errors.full_messages_for(:name).each do |message| %>
-        <div><%= message %></div>
-      <% end %>
-    </div>
+  <p>
+    <%= form.label :brand %><br>
+    <%= form.text_field :brand %>
+    <% product.errors.full_messages_for(:brand).each do |message| %>
+       <div><%= message %></div>
+    <% end %>
+  </p>
 
-  <div>
+  <p>
     <%= form.submit %>
-  </div>
+  </p>
 <% end %>

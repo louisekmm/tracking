@@ -1,0 +1,42 @@
+
+<%= form_with model: [ product, inventoryitem ] do |form| %>
+
+  <p>
+    <%= form.label :instock_qty %><br>
+    <%= form.text_field :instock_qty %>
+  </p>
+
+  <p>
+    <%= form.label :incoming_qty %><br>
+    <%= form.text_area :incoming_qty %>
+  </p>
+
+  <p>
+    <%= form.label :reserved_qty %><br>
+    <%= form.text_area :reserved_qty %>
+  </p>
+
+  <p>
+    <%= form.label :min_instock_qty %><br>
+    <%= form.text_area :min_instock_qty %>
+  </p>
+
+  <p>
+    <%= form.label :max_instock_qty %><br>
+    <%= form.text_area :max_instock_qty %>
+  </p>
+
+  <p>
+    <%= form.label :expiration_date %><br>
+    <%= form.text_area :expiration_date %>
+  </p>
+
+  <p>
+    <%= form.label :size %><br>
+    <%= form.text_area :size %>
+  </p>
+
+  <p>
+    <%= form.submit %>
+  </p>
+<% end %>
