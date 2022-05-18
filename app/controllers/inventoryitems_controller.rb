@@ -13,12 +13,12 @@ class InventoryitemsController < ApplicationController
 
   def edit
     @product = Product.find(params[:product_id])
-    @inventoryitem = @product.inventoryitems.find(params[:product_id])
+    @inventoryitem = @product.inventoryitems.find(params[:id])
   end
 
   def update
     @product = Product.find(params[:product_id])
-    @inventoryitem = @product.inventoryitems.find(params[:product_id])
+    @inventoryitem = @product.inventoryitems.find(params[:id])
 
     if @inventoryitem.update(inventoryitem_params)
       redirect_to @product
@@ -29,11 +29,11 @@ class InventoryitemsController < ApplicationController
 
   def destroy
     @product = Product.find(params[:product_id])
-    @inventoryitem = @product.inventoryitems.find(params[:product_id])
+    @inventoryitem = @product.inventoryitems.find(params[:id])
 
     @inventoryitem.destroy
 
-    redirect_to root_path, status: :see_other
+    redirect_to root_path, status: 303
   end
 
   private

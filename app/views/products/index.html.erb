@@ -1,6 +1,8 @@
 <h1>Products</h1>
 
-<%= link_to "New Product", new_product_path %>
+<p><%= link_to "New Product", new_product_path %></p>
+
+<h4>Select a product below to see its detailed inventory</h4>
 
 <ul>
   <% @products.each do |product| %>
@@ -9,3 +11,61 @@
     </li>
   <% end %>
 </ul>
+
+<% if @products.blank? %>
+  No products items yet.
+<% end %>
+
+<h2>General Inventory</h2>
+
+<table border="1">
+
+  <tr>
+    <td>Product</td>
+    <td>In stock</td>
+    <td>Incoming</td>
+    <td>Size</td>
+    <td>Status</td>
+    <td>Edit</td>
+    <td>Delete</td>
+  </tr>
+
+  <% @products.each do |product| %>
+
+    <% product.inventoryitems.each do |inventoryitem| %>
+
+      <tr>
+          <td><%= product.name %></td>
+          <td><%= inventoryitem.instock_qty %></td>
+          <td><%= inventoryitem.incoming_qty %></td>
+          <td><%= inventoryitem.size %></td>
+          <td>
+            <% if (inventoryitem.expiration_date.to_s..Time.now.strftime("%Y-%m-%d")).count <= 0 %>
+              Expired
+            <% elsif inventoryitem.max_instock_qty >= inventoryitem.instock_qty and inventoryitem.incoming_qty < inventoryitem.min_instock_qty %>
+              Low stock
+            <% elsif (inventoryitem.expiration_date.to_s..Time.now.strftime("%Y-%m-%d")).count < 4 and
+            (inventoryitem.expiration_date.to_s..Time.now.strftime("%Y-%m-%d")).count > 0 %>
+              On sale
+            <% else %>
+              Ok
+            <% end %>
+
+          </td>
+          <td><%= link_to "Edit item", edit_product_inventoryitem_path(product, inventoryitem) %></td>
+          <td>
+            <%= link_to "Delete item", product_inventoryitem_path(product, inventoryitem), data: {
+                        turbo_method: :delete,
+                        turbo_confirm: "Do you confirm to delete this inventory item?"
+                      } %>
+          </td>
+      </tr>
+
+    <% end %>
+    <% if product.inventoryitems.blank? %>
+      <tr><td colspan=7>No inventory items yet.</td></tr>
+    <% end %>
+  <% end %>
+
+</table>
+

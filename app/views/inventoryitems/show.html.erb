@@ -1,16 +1,4 @@
 <%= link_to "Home", root_path %> |
-<%= link_to "Edit product", edit_product_path(@product) %> |
-<%= link_to "Delete product", product_path(@product), data: {
-                    turbo_method: :delete,
-                    turbo_confirm: "Are you sure?"
-                  } %>
-
-<h1><%= @product.name %></h1>
-
-<p><%= @product.description %></p>
-<p>Weight: <%= @product.weight %> kg</p>
-<p>Price: $<%= @product.price %></p>
-<p>Brand: <%= @product.brand %></p>
 
 <h2>Inventory</h2>
 
@@ -18,6 +6,7 @@
 
 <table border="1">
   <tr>
+    <td>Product</td>
     <td>Total</td>
     <td>In stock</td>
     <td>Incoming</td>
@@ -33,6 +22,7 @@
 
   <% @product.inventoryitems.each do |inventoryitem| %>
     <tr>
+        <td>@product.name</td>
         <td><%= inventoryitem.instock_qty + inventoryitem.incoming_qty + inventoryitem.incoming_qty %></td>
         <td><%= inventoryitem.instock_qty %></td>
         <td><%= inventoryitem.incoming_qty %></td>
@@ -56,7 +46,7 @@
         </td>
         <td><%= link_to "Edit item", edit_product_inventoryitem_path(@product, inventoryitem) %></td>
         <td>
-          <%= link_to "Delete item", product_inventoryitem_path(@product), data: {
+          <%= link_to "Delete item", product_inventoryitem_path(@product, inventoryitem), data: {
                       turbo_method: :delete,
                       turbo_confirm: "Do you confirm to delete this inventory item?"
                     } %>

@@ -40,7 +40,7 @@ class ProductsController < ApplicationController
     @product = Product.find(params[:id])
     @product.destroy
 
-    redirect_to @product, status: :see_other
+    redirect_to root_path, status: :see_other
   end
 
   private

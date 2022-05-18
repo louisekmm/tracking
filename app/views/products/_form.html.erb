@@ -1,3 +1,4 @@
+<p><%= link_to "Home", root_path %></p>
 <%= form_with model: product do |form| %>
   <p>
     <%= form.label :name %><br>
@@ -9,7 +10,7 @@
 
   <p>
     <%= form.label :description %><br>
-    <%= form.text_field :description %>
+    <%= form.text_area :description %>
     <% product.errors.full_messages_for(:description).each do |message| %>
       <div><%= message %></div>
     <% end %>
@@ -17,7 +18,7 @@
 
   <p>
     <%= form.label :weight %><br>
-    <%= form.text_field :weight %>
+    <%= form.number_field :weight %>
     <% product.errors.full_messages_for(:weight).each do |message| %>
       <div><%= message %></div>
     <% end %>
@@ -25,7 +26,7 @@
 
   <p>
     <%= form.label :price %><br>
-    <%= form.text_field :price %>
+    <%= form.number_field :price %>
     <% product.errors.full_messages_for(:price).each do |message| %>
       <div><%= message %></div>
     <% end %>
