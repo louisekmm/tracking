@@ -2,11 +2,9 @@ class Inventoryitem < ApplicationRecord
 
   belongs_to :product
 
-  validates :instock_qty, presence: true, numericality: { only_integer: true }
-  validates :incoming_qty, presence: true, numericality: { only_integer: true }
-  validates :reserved_qty, presence: true, numericality: { only_integer: true }
-  validates :min_instock_qty, presence: true, numericality: { only_integer: true }
-  validates :max_instock_qty, presence: true, numericality: { only_integer: true }
+  validates :status, presence: true
+  validates :barcode, presence: true
+  validates :lot_number, presence: true
   validates :expiration_date, presence: true, format: { with: /\d{4}\-\d{2}\-\d{2}/, message: "must be yyyy-mm-dd" }
   validates :size, presence: true
 end

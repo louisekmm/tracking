@@ -3,56 +3,72 @@
 <%= link_to "Delete product", product_path(@product), data: {
                     turbo_method: :delete,
                     turbo_confirm: "Are you sure?"
-                  } %>
+                  } %> |
+<%= link_to "Add inventory item", new_product_inventoryitem_path(@product) %>
 
-<h1><%= @product.name %></h1>
+<h1>Product: <%= @product.name %></h1>
 
-<p><%= @product.description %></p>
+<p>Description: <%= @product.description %></p>
 <p>Weight: <%= @product.weight %> kg</p>
 <p>Price: $<%= @product.price %></p>
 <p>Brand: <%= @product.brand %></p>
 
 <h2>Inventory</h2>
 
-<p><%= link_to "Create a new inventory item", new_product_inventoryitem_path(@product) %></p>
-
+<h3>Inventory statistics</h3>
 <table border="1">
   <tr>
     <td>Total</td>
     <td>In stock</td>
-    <td>Incoming</td>
     <td>Reserved</td>
-    <td>Min in stock</td>
-    <td>Max in stock</td>
+    <td>Incoming</td>
+    <td>Sold</td>
+    <td>Expired</td>
+    <td>Time for sale</td>
+  </tr>
+
+  <% @product.inventoryitems.each do |inventoryitem| %>
+    <tr>
+        <td><%= @total_count %>
+        <td><%= @instock_count %></td>
+        <td><%= @reserved_count %></td>
+        <td><%= @incoming_count %></td>
+        <td><%= @sold_count %></td>
+        <td><%= @expired_count %></td>
+        <td></td>
+    </tr>
+  <% end %>
+</table>
+
+<h3>Inventory items</h3>
+<table border="1">
+  <tr>
+    <td>Barcode</td>
+    <td>Status</td>
+    <td>Lot Number</td>
     <td>Expiration Date</td>
     <td>Size</td>
-    <td>Status</td>
+    <td>Alert</td>
     <td>Edit</td>
     <td>Delete</td>
   </tr>
 
   <% @product.inventoryitems.each do |inventoryitem| %>
     <tr>
-        <td><%= inventoryitem.instock_qty + inventoryitem.incoming_qty + inventoryitem.incoming_qty %></td>
-        <td><%= inventoryitem.instock_qty %></td>
-        <td><%= inventoryitem.incoming_qty %></td>
-        <td><%= inventoryitem.reserved_qty %></td>
-        <td><%= inventoryitem.min_instock_qty %></td>
-        <td><%= inventoryitem.max_instock_qty %></td>
+        <td><%= inventoryitem.barcode %>
+        <td><%= inventoryitem.status %></td>
+        <td><%= inventoryitem.lot_number %></td>
         <td><%= inventoryitem.expiration_date %></td>
         <td><%= inventoryitem.size %></td>
         <td>
           <% if (inventoryitem.expiration_date.to_s..Time.now.strftime("%Y-%m-%d")).count <= 0 %>
             Expired
-          <% elsif inventoryitem.max_instock_qty >= inventoryitem.instock_qty and inventoryitem.incoming_qty < inventoryitem.min_instock_qty %>
-            Low stock
           <% elsif (inventoryitem.expiration_date.to_s..Time.now.strftime("%Y-%m-%d")).count < 4 and
           (inventoryitem.expiration_date.to_s..Time.now.strftime("%Y-%m-%d")).count > 0 %>
-            On sale
+            Time for sale
           <% else %>
-            Ok
+            None
           <% end %>
-
         </td>
         <td><%= link_to "Edit item", edit_product_inventoryitem_path(@product, inventoryitem) %></td>
         <td>

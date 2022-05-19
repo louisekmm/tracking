@@ -1,49 +1,32 @@
-<p><%= link_to "Go back", @product %></p>
 <%= form_with model: [ product, inventoryitem ] do |form| %>
 
   <p>
-    <%= form.label :instock_qty %><br>
-    <%= form.text_field :instock_qty %>
-    <% inventoryitem.errors.full_messages_for(:instock_qty).each do |message| %>
+    <%= form.label :barcode %><br>
+    <%= form.text_field :barcode %>
+    <% inventoryitem.errors.full_messages_for(:barcode).each do |message| %>
       <div><%= message %></div>
     <% end %>
   </p>
 
   <p>
-    <%= form.label :incoming_qty %><br>
-    <%= form.text_area :incoming_qty %>
-    <% inventoryitem.errors.full_messages_for(:incoming_qty).each do |message| %>
+    <%= form.label :status %><br>
+    <%= form.select :status, ['In stock', 'Reserved', 'Incoming', 'Sold' ] %>
+    <% inventoryitem.errors.full_messages_for(:status).each do |message| %>
       <div><%= message %></div>
     <% end %>
   </p>
 
   <p>
-    <%= form.label :reserved_qty %><br>
-    <%= form.text_area :reserved_qty %>
-    <% inventoryitem.errors.full_messages_for(:reserved_qty).each do |message| %>
-      <div><%= message %></div>
-    <% end %>
-  </p>
-
-  <p>
-    <%= form.label :min_instock_qty %><br>
-    <%= form.text_area :min_instock_qty %>
-    <% inventoryitem.errors.full_messages_for(:min_instock_qty).each do |message| %>
-      <div><%= message %></div>
-    <% end %>
-  </p>
-
-  <p>
-    <%= form.label :max_instock_qty %><br>
-    <%= form.text_area :max_instock_qty %>
-    <% inventoryitem.errors.full_messages_for(:max_instock_qty).each do |message| %>
+    <%= form.label :lot_number %><br>
+    <%= form.text_field :lot_number %>
+    <% inventoryitem.errors.full_messages_for(:lot_number).each do |message| %>
       <div><%= message %></div>
     <% end %>
   </p>
 
   <p>
     <%= form.label :expiration_date %><br>
-    <%= form.text_area :expiration_date %>
+    <%= form.date_select :expiration_date %>
     <% inventoryitem.errors.full_messages_for(:expiration_date).each do |message| %>
       <div><%= message %></div>
     <% end %>
@@ -51,7 +34,7 @@
 
   <p>
     <%= form.label :size %><br>
-    <%= form.text_area :size %>
+    <%= form.text_field :size %>
     <% inventoryitem.errors.full_messages_for(:size).each do |message| %>
       <div><%= message %></div>
     <% end %>
