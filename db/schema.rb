@@ -11,14 +11,10 @@
 # It's strongly recommended that you check this file into your version control system.
 
 <<<<<<< HEAD
-<<<<<<< HEAD
 ActiveRecord::Schema.define(version: 2022_05_19_161640) do
 =======
 ActiveRecord::Schema.define(version: 2022_05_19_160158) do
 >>>>>>> parent of e3af9f0 (Add many to many warehouse-inventory_item)
-=======
-ActiveRecord::Schema.define(version: 2022_05_19_160614) do
->>>>>>> parent of f09985b (Revert table warehouse-inventory_item)
 
   create_table "inventoryitems", force: :cascade do |t|
     t.date "expiration_date"
