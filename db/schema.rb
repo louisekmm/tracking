@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_05_18_180920) do
+ActiveRecord::Schema.define(version: 2022_05_19_160158) do
 
   create_table "inventoryitems", force: :cascade do |t|
     t.date "expiration_date"
@@ -30,6 +30,15 @@ ActiveRecord::Schema.define(version: 2022_05_18_180920) do
     t.float "weight"
     t.float "price"
     t.string "brand"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "warehouses", force: :cascade do |t|
+    t.string "name"
+    t.string "zip_code"
+    t.string "city"
+    t.string "province"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
