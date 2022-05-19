@@ -1,2 +1,0 @@
-class WarehouseInventoryItemsController < ApplicationController
-end

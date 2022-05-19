@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_05_19_160614) do
+ActiveRecord::Schema.define(version: 2022_05_19_161640) do
 
   create_table "inventoryitems", force: :cascade do |t|
     t.date "expiration_date"
