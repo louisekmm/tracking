@@ -2,7 +2,7 @@
 <%= link_to "Edit product", edit_product_path(@product) %> |
 <%= link_to "Delete product", product_path(@product), data: {
                     turbo_method: :delete,
-                    turbo_confirm: "Are you sure?"
+                    turbo_confirm: "Do you confirm deleting product and all its inventory?"
                   } %> |
 <%= link_to "Add inventory item", new_product_inventoryitem_path(@product) %>
 
@@ -74,7 +74,7 @@
         <td>
           <%= link_to "Delete item", product_inventoryitem_path(@product), data: {
                       turbo_method: :delete,
-                      turbo_confirm: "Do you confirm to delete this inventory item?"
+                      turbo_confirm: "Do you confirm deleting this inventory item?"
                     } %>
         </td>
     </tr>

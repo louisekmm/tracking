@@ -2,6 +2,9 @@ class Inventoryitem < ApplicationRecord
 
   belongs_to :product
 
+  has_many :warehouse_inventoryitems, dependent: :destroy
+  has_many :warehouses, through: :warehouse_inventoryitems
+
   validates :status, presence: true
   validates :barcode, presence: true
   validates :lot_number, presence: true

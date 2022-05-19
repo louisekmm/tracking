@@ -6,6 +6,10 @@ Rails.application.routes.draw do
 
   resources :products do
     resources :inventoryitems
+
+  resources :warehouses
+  resources :warehouse_inventoryitems
+
   end
 
 end
