@@ -6,10 +6,12 @@ class WarehousesController < ApplicationController
 
   def show
     @warehouse = Warehouse.find(params[:id])
+    @warehouse_inventory_items = WarehouseInventoryItem.where(warehouse_id: params[:id])
   end
 
   def new
     @warehouse = Warehouse.new
+  end
 
   def create
     @warehouse = Warehouse.new(warehouse_params)
@@ -41,5 +43,10 @@ class WarehousesController < ApplicationController
 
     redirect_to root_path, status: :see_other
   end
+
+  private
+    def warehouse_params
+      params.require(:warehouse).permit(:name, :zip_code, :city, :province)
+    end
 
 end

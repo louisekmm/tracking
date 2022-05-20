@@ -1,6 +1,6 @@
 require "test_helper"
 
-class WarehouseInventoryitemTest < ActiveSupport::TestCase
+class Warehouseinventory_itemTest < ActiveSupport::TestCase
   # test "the truth" do
   #   assert true
   # end

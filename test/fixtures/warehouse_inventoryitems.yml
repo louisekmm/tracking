@@ -2,8 +2,8 @@
 
 one:
   warehouse: one
-  inventoryitem: one
+  inventory_item: one
 
 two:
   warehouse: two
-  inventoryitem: two
+  inventory_item: two

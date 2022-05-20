@@ -1,0 +1,19 @@
+<%= link_to "All Products", root_path %> |
+<%= link_to "New Warehouse", new_warehouse_path %>
+
+
+<h1>Warehouses</h1>
+
+<h4>Select a warehouse below to see its detailed inventory</h4>
+
+<ul>
+  <% @warehouses.each do |warehouse| %>
+    <li>
+      <%= link_to warehouse.name, warehouse %>
+    </li>
+  <% end %>
+</ul>
+
+<% if @warehouses.blank? %>
+  No warehouses yet.
+<% end %>

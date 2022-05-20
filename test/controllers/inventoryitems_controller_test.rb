@@ -1,6 +1,6 @@
 require "test_helper"
 
-class InventoryitemsControllerTest < ActionDispatch::IntegrationTest
+class inventory_itemsControllerTest < ActionDispatch::IntegrationTest
   # test "the truth" do
   #   assert true
   # end

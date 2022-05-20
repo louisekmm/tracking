@@ -1,6 +1,6 @@
 class Product < ApplicationRecord
 
-  has_many :inventoryitems, dependent: :destroy
+  has_many :inventory_items, dependent: :destroy
 
   validates :name, presence: true, length: { minimum: 3 }
   validates :description, presence: true, length: { minimum: 5 }

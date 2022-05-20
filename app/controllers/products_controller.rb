@@ -6,14 +6,14 @@ class ProductsController < ApplicationController
 
   def show
     @product = Product.find(params[:id])
-    @instock_count = Inventoryitem.where(product_id: params[:id], status: "In stock").count
-    @reserved_count = Inventoryitem.where(product_id: params[:id], status: "Reserved").count
-    @incoming_count = Inventoryitem.where(product_id: params[:id], status: "Incoming").count
-    @sold_count = Inventoryitem.where(product_id: params[:id], status: "SOLD").count
-    @total_count = Inventoryitem.where(product_id: params[:id]).count
+    @instock_count = InventoryItem.where(product_id: params[:id], status: "In stock").count
+    @reserved_count = InventoryItem.where(product_id: params[:id], status: "Reserved").count
+    @incoming_count = InventoryItem.where(product_id: params[:id], status: "Incoming").count
+    @sold_count = InventoryItem.where(product_id: params[:id], status: "SOLD").count
+    @total_count = InventoryItem.where(product_id: params[:id]).count
 
-    @expired_count = Inventoryitem.where(Inventoryitem.arel_table[:expiration_date].lt(Date.current)).count
-    @sale_count = Inventoryitem.where(Inventoryitem.arel_table[:expiration_date].gt(Date.current)).count
+    @expired_count = InventoryItem.where(InventoryItem.arel_table[:expiration_date].lt(Date.current)).count
+    @sale_count = InventoryItem.where(InventoryItem.arel_table[:expiration_date].gt(Date.current)).count
 
     if @expired_count > 0
       @alert = "Expired"
