@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_05_19_160158) do
+ActiveRecord::Schema.define(version: 2022_05_22_194117) do
 
   create_table "inventory_items", force: :cascade do |t|
     t.date "expiration_date"
@@ -22,6 +22,7 @@ ActiveRecord::Schema.define(version: 2022_05_19_160158) do
     t.string "status"
     t.string "lot_number"
     t.string "barcode"
+    t.string "alert"
     t.index ["product_id"], name: "index_inventory_items_on_product_id"
     t.index ["warehouse_id"], name: "index_inventory_items_on_warehouse_id"
   end
