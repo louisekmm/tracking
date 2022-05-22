@@ -4,10 +4,10 @@ one:
   name: MyString
   zip_code: K1R 7T8
   city: MyString
-  province: ON
+  province: "ON"
 
 two:
   name: MyString
   zip_code: K1R 7T8
   city: MyString
-  province: ON
+  province: "ON"
