@@ -19,3 +19,7 @@ To show an inventory tracking information, I created three alerts:
 * **Time for sale**: this inventory item should be on sale due to its expiration date being less or equal than 3 days from today.
 
 * **None**: no alerts for this inventory item.
+
+You can run this app:
+1. by cloning it, running `bundle install` and then `rails server`
+2. using the Replit link: https://replit.com/@LouiseMartins1/tracking
