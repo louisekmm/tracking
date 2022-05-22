@@ -22,7 +22,7 @@ class InventoryItemsControllerTest < ActionDispatch::IntegrationTest
     assert InventoryItem.find(new_inventory_item.id)
   end
 
-  test "PUT inventory_items#edit edits an inventory item properties" do
+  test "PUT inventory_items#edit edits an inventory item property" do
     inventory_item_id = @product.inventory_items.first.id
 
     put "/products/#{@product.id}/inventory_items/#{inventory_item_id}", :params => {
@@ -55,6 +55,6 @@ class InventoryItemsControllerTest < ActionDispatch::IntegrationTest
       :product_id => @product.id
     }
 
-    refute @product.inventory_items.any? { |inventory_item| inventory_item.id == inventory_item_id }
+    assert_nil InventoryItem.find_by(id: inventory_item_id)
   end
 end
