@@ -2,12 +2,12 @@
 
 one:
   name: MyString
-  zip_code: MyString
+  zip_code: K1R 7T8
   city: MyString
-  province: MyString
+  province: ON
 
 two:
   name: MyString
-  zip_code: MyString
+  zip_code: K1R 7T8
   city: MyString
-  province: MyString
+  province: ON

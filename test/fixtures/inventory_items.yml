@@ -5,7 +5,7 @@ one:
   size: MyString
   product: one
   warehouse: one
-  status: In stock
+  status: Stock
   barcode: "10000"
   lot_number: "123"
   size: "10"
@@ -15,7 +15,7 @@ two:
   size: MyString
   product: two
   warehouse: two
-  status: In stock
+  status: Stock
   barcode: "10000"
   lot_number: "123"
   size: "10"

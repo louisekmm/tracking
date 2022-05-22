@@ -9,29 +9,52 @@ class InventoryItemsControllerTest < ActionDispatch::IntegrationTest
     post "/products/#{@product.id}/inventory_items", :params => {
       :product_id => @product.id,
       :inventory_item => {
-        :status => "In stock",
+        :status => "Stock",
         :barcode => "10",
         :lot_number => "10",
-        :expiration_date => Time.now,
+        :expiration_date => Date.today,
         :size => "10",
-        :warehouse_id => "one"
+        :warehouse_id => Warehouse.first.id
       }
     }
 
-    inventory_item = assigns(:inventory_item)
-    assert_equal inventory_item.product_id, @product.id
+    new_inventory_item = assigns(:inventory_item)
+    assert InventoryItem.find(new_inventory_item.id)
   end
 
   test "PUT inventory_items#edit edits an inventory item properties" do
-    inventory_item = @product.inventory_items.first
+    inventory_item_id = @product.inventory_items.first.id
 
-    put "/products/#{@product.id}/inventory_items/#{inventory_item.id}", :params => {
+    put "/products/#{@product.id}/inventory_items/#{inventory_item_id}", :params => {
       :product_id => @product.id,
       :inventory_item => {
-        :status => "No stock"
+        :status => "Reserved"
       }
     }
 
-    refute_equal inventory_item.status, assigns(:inventory_item).status
+    assert_equal InventoryItem.find(inventory_item_id).status, "Reserved"
+  end
+
+  test "PUT inventory_items#edit fails validation if trying to edit an inventory item property with an invalid value" do
+    inventory_item_id = @product.inventory_items.first.id
+
+    put "/products/#{@product.id}/inventory_items/#{inventory_item_id}", :params => {
+      :product_id => @product.id,
+      :inventory_item => {
+        :status => "Invalid state"
+      }
+    }
+
+    refute_equal InventoryItem.find(inventory_item_id).status, "Invalid state"
+  end
+
+  test "DELETE inventory_items#destroy should delete the inventory item" do
+    inventory_item_id = @product.inventory_items.first.id
+
+    delete "/products/#{@product.id}/inventory_items/#{inventory_item_id}", :params => {
+      :product_id => @product.id
+    }
+
+    refute @product.inventory_items.any? { |inventory_item| inventory_item.id == inventory_item_id }
   end
 end
