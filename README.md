@@ -1,24 +1,21 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+This is my submission for the **Shopify Technical Challenge Submission for Backend Intern - fall 2022**.
+Aside from the main task of creating a inventory tracking, I also implemented the "Ability to create warehouses/locations and assign inventory to specific locations".
 
-Things you may want to cover:
+This app is composed of three entities:
 
-* Ruby version
+* **Products**: where all products properties are stored. Each product has many inventory items.
 
-* System dependencies
+* **Warehouses**: where all warehouses properties are stored. Each warehouse has many inventory items.
 
-* Configuration
+* **Inventory items**: where all inventory items proerties are stored. Each inventory item belongs to a warehouse and a product.
 
-* Database creation
 
-* Database initialization
+To show an inventory tracking information, I created three alerts:
 
-* How to run the test suite
+* **Expired**: this inventory item has expired, according to its expiration date.
 
-* Services (job queues, cache servers, search engines, etc.)
+* **Time for sale**: this inventory item should be on sale due to its expiration date being less or equal than 3 days from today.
 
-* Deployment instructions
-
-* ...
+* **None**: no alerts for this inventory item.
