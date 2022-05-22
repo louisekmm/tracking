@@ -18,7 +18,7 @@
 
   <p>
     <%= form.label :status %><br>
-    <%= form.select :status, ['In stock', 'Reserved', 'Incoming', 'Sold' ] %>
+    <%= form.select :status, ['Stock', 'Reserved', 'Incoming', 'Sold' ] %>
     <% inventory_item.errors.full_messages_for(:status).each do |message| %>
       <div><%= message %></div>
     <% end %>
