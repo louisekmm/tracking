@@ -5,7 +5,7 @@
   <%= link_to "Delete Warehouse", warehouse_path(@warehouse), data: {
                       turbo_method: :delete,
                       turbo_confirm: "Do you confirm deleting this warehouse and all its inventory?"
-                    } %> |
+                    } %>
  </p>
 
 <h1>Warehouse: <%= @warehouse.name %></h1>
@@ -42,6 +42,7 @@
 </table>
 
 <h3>Inventory items</h3>
+<h5>*To create a new inventory item click on the product below</h5>
 <table border="1">
   <tr>
     <td>Product</td>
@@ -50,26 +51,31 @@
     <td>Lot Number</td>
     <td>Expiration Date</td>
     <td>Size</td>
+    <td>Alert</td>
     <td>Edit</td>
     <td>Delete</td>
   </tr>
 
+  <% counter = 0 %>
   <% @warehouse.inventory_items.each do |inventory_item| %>
     <tr>
-        <td><%= inventory_item.product.name %></td>
+        <td><%= link_to inventory_item.product.name, edit_product_path(inventory_item.product) %></td>
         <td><%= inventory_item.barcode %>
         <td><%= inventory_item.status %></td>
         <td><%= inventory_item.lot_number %></td>
         <td><%= inventory_item.expiration_date %></td>
         <td><%= inventory_item.size %></td>
-        <td><%= link_to "Edit item", edit_product_inventory_item_path(@warehouse, inventory_item) %></td>
+        <td><%= @alerts[counter] %></td>
+        <td><%= link_to "Edit item", edit_product_inventory_item_path(inventory_item.product, inventory_item) %></td>
         <td>
-          <%= link_to "Delete item", product_inventory_item_path(@warehouse), data: {
+          <%= link_to "Delete item", product_inventory_item_path(inventory_item.product, inventory_item), data: {
                       turbo_method: :delete,
                       turbo_confirm: "Do you confirm deleting this inventory item?"
                     } %>
         </td>
+
     </tr>
+    <% counter += 1 %>
   <% end %>
 </table>
 
