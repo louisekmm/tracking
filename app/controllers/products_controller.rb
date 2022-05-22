@@ -6,18 +6,16 @@ class ProductsController < ApplicationController
 
   def show
     @product = Product.find(params[:id])
-    @instock_count = InventoryItem.where(product_id: params[:id], status: "In stock").count
-    @reserved_count = InventoryItem.where(product_id: params[:id], status: "Reserved").count
-    @incoming_count = InventoryItem.where(product_id: params[:id], status: "Incoming").count
-    @sold_count = InventoryItem.where(product_id: params[:id], status: "SOLD").count
+
+    @instock_count = @product.inventory_items.where(status: "In stock").count
+    @reserved_count = @product.inventory_items.where(status: "Reserved").count
+    @incoming_count = @product.inventory_items.where(status: "Incoming").count
+    @sold_count = @product.inventory_items.where(status: "Sold").count
     @total_count = InventoryItem.where(product_id: params[:id]).count
 
-    @expired_count = InventoryItem.where(InventoryItem.arel_table[:expiration_date].lt(Date.current)).count
-    @sale_count = InventoryItem.where(InventoryItem.arel_table[:expiration_date].gt(Date.current)).count
-
-    if @expired_count > 0
-      @alert = "Expired"
-    end
+    @expired_count = @product.inventory_items.where(expiration_date: ..-1.days.from_now).count
+    @sale_count = @product.inventory_items.where(expiration_date: ..3.days.from_now, expiration_date: 0.days.from_now).count
+    @warehouse_count = @product.inventory_items.group_by(&:warehouse_id).count
 
   end
 

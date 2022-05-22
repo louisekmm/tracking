@@ -1,21 +1,21 @@
 # Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  instock_qty: 1
-  incoming_qty: 1
-  reserved_qty: 1
-  min_instock_qty: 1
-  max_instock_qty: 1
   expiration_date: 2022-05-17
   size: MyString
   product: one
+  warehouse: one
+  status: In stock
+  barcode: "10000"
+  lot_number: "123"
+  size: "10"
 
 two:
-  instock_qty: 1
-  incoming_qty: 1
-  reserved_qty: 1
-  min_instock_qty: 1
-  max_instock_qty: 1
   expiration_date: 2022-05-17
   size: MyString
   product: two
+  warehouse: two
+  status: In stock
+  barcode: "10000"
+  lot_number: "123"
+  size: "10"

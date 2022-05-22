@@ -6,7 +6,17 @@ class WarehousesController < ApplicationController
 
   def show
     @warehouse = Warehouse.find(params[:id])
-    @warehouse_inventory_items = WarehouseInventoryItem.where(warehouse_id: params[:id])
+
+    @instock_count = @warehouse.inventory_items.where(status: "In stock").count
+    @reserved_count = @warehouse.inventory_items.where(status: "Reserved").count
+    @incoming_count = @warehouse.inventory_items.where(status: "Incoming").count
+    @sold_count = @warehouse.inventory_items.where(status: "Sold").count
+    @total_count = InventoryItem.where(warehouse_id: params[:id]).count
+
+    @expired_count = @warehouse.inventory_items.where(expiration_date: ..-1.days.from_now).count
+    @sale_count = @warehouse.inventory_items.where(expiration_date: ..3.days.from_now, expiration_date: 0.days.from_now).count
+    @warehouse_count = @warehouse.inventory_items.group_by(&:product_id).count
+
   end
 
   def new
@@ -45,8 +55,9 @@ class WarehousesController < ApplicationController
   end
 
   private
-    def warehouse_params
-      params.require(:warehouse).permit(:name, :zip_code, :city, :province)
-    end
+
+  def warehouse_params
+    params.require(:warehouse).permit(:name, :zip_code, :city, :province)
+  end
 
 end

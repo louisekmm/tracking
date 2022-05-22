@@ -1,49 +1,70 @@
-<%= link_to "Home", root_path %> |
-<%= link_to "Edit warehouse", edit_warehouse_path(@warehouse) %> |
-<%= link_to "Delete warehouse", warehouse_path(@warehouse), data: {
-                    turbo_method: :delete,
-                    turbo_confirm: "Do you confirm deleting warehouse and all its inventory?"
-                  } %>
+<p>
+  <%= link_to "All Products", root_path %> |
+  <%= link_to "All Warehouses", warehouses_path %> |
+  <%= link_to "Edit Warehouse", edit_warehouse_path(@warehouse) %> |
+  <%= link_to "Delete Warehouse", warehouse_path(@warehouse), data: {
+                      turbo_method: :delete,
+                      turbo_confirm: "Do you confirm deleting this warehouse and all its inventory?"
+                    } %> |
+ </p>
 
 <h1>Warehouse: <%= @warehouse.name %></h1>
 
-<p>Zipcode: <%= @warehouse.zip_code %> kg</p>
-<p>City: $<%= @warehouse.city %></p>
+<p>Zipcode: <%= @warehouse.zip_code %></p>
+<p>City: <%= @warehouse.city %></p>
 <p>Province: <%= @warehouse.province %></p>
+
+<h2>Inventory of this warehouse</h2>
+
+<h3>Inventory statistics</h3>
+<table border="1">
+  <tr>
+    <td>Total</td>
+    <td>In stock</td>
+    <td>Reserved</td>
+    <td>Incoming</td>
+    <td>Sold</td>
+    <td>Expired</td>
+    <td>Time for sale</td>
+    <td># Distinct products</td>
+  </tr>
+
+    <tr>
+        <td><%= @total_count %>
+        <td><%= @instock_count %></td>
+        <td><%= @reserved_count %></td>
+        <td><%= @incoming_count %></td>
+        <td><%= @sold_count %></td>
+        <td><%= @expired_count %></td>
+        <td><%= @sale_count %></td>
+        <td><%= @warehouse_count %></td>
+    </tr>
+</table>
 
 <h3>Inventory items</h3>
 <table border="1">
   <tr>
+    <td>Product</td>
     <td>Barcode</td>
     <td>Status</td>
     <td>Lot Number</td>
     <td>Expiration Date</td>
     <td>Size</td>
-    <td>Alert</td>
     <td>Edit</td>
     <td>Delete</td>
   </tr>
 
-  <% @warehouse_inventory_items.each do |warehouse_inventory_item| %>
+  <% @warehouse.inventory_items.each do |inventory_item| %>
     <tr>
-        <td><%= warehouse_inventory_item.inventory_item.barcode %>
-        <td><%= warehouse_inventory_item.inventory_item.status %></td>
-        <td><%= warehouse_inventory_item.inventory_item.lot_number %></td>
-        <td><%= warehouse_inventory_item.inventory_item.expiration_date %></td>
-        <td><%= warehouse_inventory_item.inventory_item.size %></td>
+        <td><%= inventory_item.product.name %></td>
+        <td><%= inventory_item.barcode %>
+        <td><%= inventory_item.status %></td>
+        <td><%= inventory_item.lot_number %></td>
+        <td><%= inventory_item.expiration_date %></td>
+        <td><%= inventory_item.size %></td>
+        <td><%= link_to "Edit item", edit_product_inventory_item_path(@warehouse, inventory_item) %></td>
         <td>
-          <% if (warehouse_inventory_item.inventory_item.expiration_date.to_s..Time.now.strftime("%Y-%m-%d")).count <= 0 %>
-            Expired
-          <% elsif (warehouse_inventory_item.inventory_item.expiration_date.to_s..Time.now.strftime("%Y-%m-%d")).count < 4 and
-          (warehouse_inventory_item.inventory_item.expiration_date.to_s..Time.now.strftime("%Y-%m-%d")).count > 0 %>
-            Time for sale
-          <% else %>
-            None
-          <% end %>
-        </td>
-        <td><%= link_to "Edit item", edit_product_inventory_item_path(@product, warehouse_inventory_item.inventory_item) %></td>
-        <td>
-          <%= link_to "Delete item", product_inventory_item_path(@product), data: {
+          <%= link_to "Delete item", product_inventory_item_path(@warehouse), data: {
                       turbo_method: :delete,
                       turbo_confirm: "Do you confirm deleting this inventory item?"
                     } %>
@@ -52,6 +73,6 @@
   <% end %>
 </table>
 
-<% if @inventory_items.blank? %>
+<% if @warehouse.inventory_items.blank? %>
   No inventory items yet.
 <% end %>

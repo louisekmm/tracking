@@ -48,7 +48,7 @@ class InventoryItemsController < ApplicationController
 
   private
     def inventory_item_params
-      params.require(:inventory_item).permit(:status, :barcode, :lot_number, :expiration_date, :size)
+      params.require(:inventory_item).permit(:status, :barcode, :lot_number, :expiration_date, :size, :warehouse_id)
     end
 
 end
