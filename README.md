@@ -22,4 +22,4 @@ To show an inventory tracking information, I created three alerts:
 
 You can run this app:
 1. by cloning it, running `bundle install`, running the migrations and then `rails server`
-2. using the Replit link: https://replit.com/@LouiseMartins1/tracking
+2. using the Replit link: https://replit.com/@LouiseMartins1/tracking (if for some reason the embedded view doesn't work because of connection refuse, try to open the url in a new tab: https://tracking.louisemartins1.repl.co/)
