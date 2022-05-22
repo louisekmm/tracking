@@ -14,9 +14,19 @@ class ProductsController < ApplicationController
     @total_count = InventoryItem.where(product_id: params[:id]).count
 
     @expired_count = @product.inventory_items.where(expiration_date: ..-1.days.from_now).count
-    @sale_count = @product.inventory_items.where(expiration_date: ..3.days.from_now, expiration_date: 0.days.from_now).count
+    @sale_count = @product.inventory_items.where(expiration_date: 0.days.from_now..3.days.from_now).count
     @warehouse_count = @product.inventory_items.group_by(&:warehouse_id).count
 
+    @alerts = Array.new
+    @product.inventory_items.each do |item|
+      if item.expiration_date < Date.current
+        Array(@alerts).push('Expired')
+      elsif item.expiration_date <= Date.current + 3.days
+        Array(@alerts).push('Time for sale')
+      else
+        Array(@alerts).push('None')
+      end
+    end
   end
 
   def new

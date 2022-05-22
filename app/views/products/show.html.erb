@@ -50,11 +50,13 @@
     <td>Lot Number</td>
     <td>Expiration Date</td>
     <td>Size</td>
-    <td>Location</td>
+    <td>Warehouse</td>
+    <td>Alert</td>
     <td>Edit</td>
     <td>Delete</td>
   </tr>
 
+  <% counter = 0 %>
   <% @product.inventory_items.each do |inventory_item| %>
     <tr>
         <td><%= inventory_item.barcode %>
@@ -63,14 +65,16 @@
         <td><%= inventory_item.expiration_date %></td>
         <td><%= inventory_item.size %></td>
         <td><%= inventory_item.warehouse.name %></td>
+        <td><%= @alerts[counter] %></td>
         <td><%= link_to "Edit item", edit_product_inventory_item_path(@product, inventory_item) %></td>
         <td>
-          <%= link_to "Delete item", product_inventory_item_path(@product), data: {
+          <%= link_to "Delete item", product_inventory_item_path(@product, inventory_item), data: {
                       turbo_method: :delete,
                       turbo_confirm: "Do you confirm deleting this inventory item?"
                     } %>
         </td>
     </tr>
+    <% counter += 1 %>
   <% end %>
 </table>
 
