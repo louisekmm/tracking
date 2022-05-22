@@ -21,5 +21,5 @@ To show an inventory tracking information, I created three alerts:
 * **None**: no alerts for this inventory item.
 
 You can run this app:
-1. by cloning it, running `bundle install` and then `rails server`
+1. by cloning it, running `bundle install`, running the migrations and then `rails server`
 2. using the Replit link: https://replit.com/@LouiseMartins1/tracking
